@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Call Example</title>
+</head>
+<body>
+  <h1>API Call Example</h1>
+  <button id="getDataBtn">Get Data</button>
+  <div id="responseData"></div>
+
+  <script>
+    document.getElementById('getDataBtn').addEventListener('click', function() {
+      fetch('https://jsonplaceholder.typicode.com/posts/1')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          document.getElementById('responseData').innerText = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+          console.error('There was a problem with the fetch operation:', error);
+        });
+    });
+  </script>
+</body>
+</html>
