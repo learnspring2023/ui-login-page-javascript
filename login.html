@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+</head>
+<body>
+  <h1>Login Page</h1>
+    <div>
+      <label for="userId">Userid:</label>
+      <input type="input" id="userId" name="userId" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button id="getDataBtn">Login</button>
+    <div id="responseData"></div>
+
+<script>
+      var userId = document.getElementById('userId').value; // Retrieve userId from input field
+      var apiUrl = `https://jsonplaceholder.org/users/${userId}`; // Construct API URL with userId
+
+    document.getElementById('getDataBtn').addEventListener('click', function() {
+      var userId = document.getElementById('userId').value; // Retrieve userId from input field
+      var apiUrl = `https://jsonplaceholder.org/users/${userId}`; // Construct API URL with userId
+
+        fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          document.getElementById('responseData').innerText = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+          console.error('There was a problem with the fetch operation:', error);
+        });
+    });
+  </script>
+
+</body>
+</html>
