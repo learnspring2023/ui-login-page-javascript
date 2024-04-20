@@ -12,7 +12,7 @@
 
   <script>
     document.getElementById('getDataBtn').addEventListener('click', function() {
-      fetch('https://jsonplaceholder.typicode.com/posts/1')
+      fetch('https://jsonplaceholder.org/users')
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
