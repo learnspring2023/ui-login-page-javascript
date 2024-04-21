@@ -19,36 +19,50 @@
     <div id="message"></div>
     <!-- <div id="responseData"></div> -->
 
-<script>
-    //jsonplaceholder.org
-    document.getElementById('getDataBtn').addEventListener('click', function() {
-      var userId = document.getElementById('userId').value; // Retrieve userId from input field
-      var password = document.getElementById('password').value; // Retrieve userId from input field
-      var apiUrl = `https://jsonplaceholder.org/users/${userId}`; // Construct API URL with userId
-      console.log(apiUrl);
-        fetch(apiUrl)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log(data.login.password);
-          var msg;
-          if(data.login.password==password) {
-            msg = "Login success"
-          } else {
-              msg = "API Success, Password incorrect";  
-          }
-          document.getElementById('message').innerText = msg;
-          document.getElementById('responseData').innerText = JSON.stringify(data, null, 2);
-        })
-        .catch(error => {
-          console.error('There was a problem with the fetch operation:', error);
-        });
-    });
-  </script>
+    <script>
+        //jsonplaceholder.org
+        document.getElementById('getDataBtn').addEventListener('click', function() {
+          var userId = document.getElementById('userId').value; // Retrieve userId from input field
+          var password = document.getElementById('password').value; // Retrieve userId from input field
+          var apiUrl = 'http://localhost:8080/login'; // API URL for login
+        //   var apiUrl = 'https://jsonplaceholder.org/users/login'; // API URL for login
+          console.log(apiUrl);
+    
+          var formData = {
+            id: parseInt(userId),
+            password: password
+          };
+            console.log(formData);
 
+          fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            console.log("data--->"+data);
+            document.getElementById('message').innerHTML = data.message;
+            // if(data.login.password==password) {
+            //   msg = "Login success"
+            // } else {
+            //   msg = "API Success, Password incorrect";  
+            // }
+            // document.getElementById('message').innerText = msg;
+            // document.getElementById('responseData').innerText = JSON.stringify(data, null, 2);
+          })
+          .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+          });
+        });
+      </script>
+    
 </body>
 </html>
