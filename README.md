@@ -1,11 +1,11 @@
 # ui-login-page-javascript
 
-http://localhost:8080/login
+http://localhost:8080/login  
 {
     "id":1,
     "password":"pass2"
-}
-  SQL
+}  
+  SQL   
   select id, password from user_info  
   where id = 1  
   and password = 'pass1'; 
