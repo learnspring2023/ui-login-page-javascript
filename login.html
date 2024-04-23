@@ -59,6 +59,7 @@
             // document.getElementById('responseData').innerText = JSON.stringify(data, null, 2);
           })
           .catch(error => {
+            document.getElementById('message').innerHTML = "Could not connect to API, pls try again later";
             console.error('There was a problem with the fetch operation:', error);
           });
         });
